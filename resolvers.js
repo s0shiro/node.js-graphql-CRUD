@@ -18,6 +18,11 @@ const resolvers = {
       await newStudent.save();
       return newStudent;
     },
+    update: async (parent, args) => {
+      const { id } = args;
+      const result = await Student.findByIdAndUpdate(id, args);
+      return result;
+    },
   },
 };
 

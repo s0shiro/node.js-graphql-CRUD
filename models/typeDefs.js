@@ -20,6 +20,7 @@ const typeDefs = gql`
   type Mutation {
     create(firstName: String, lastName: String, age: Int): Student
     update(id: ID, firstName: String, lastName: String, age: Int): Student
+    delete(id: ID): Student
   }
 `;
 

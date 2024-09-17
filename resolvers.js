@@ -1,7 +1,24 @@
-// GraphQL Resolvers
-export const resolvers = {
+import Student from "./models/Student.js";
+
+const resolvers = {
   Query: {
-    greetings: () => "GraphQL is Awesome",
-    welcome: (parent, args) => `Welcome to GrapQl ${args.name}`,
+    hello: () => "GraphQL is Awesome",
+    welcome: (parent, { name }) => `Hello ${name}`,
+    students: async () => await Student.find({}),
+    student: async (_, { id }) => await Student.findById(id),
+  },
+  Mutation: {
+    create: async (_, args) => {
+      const { firstName, lastName, age } = args;
+      const newStudent = new Student({
+        firstName,
+        lastName,
+        age,
+      });
+      await newStudent.save();
+      return newStudent;
+    },
   },
 };
+
+export { resolvers };
